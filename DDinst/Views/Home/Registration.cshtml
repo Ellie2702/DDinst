@@ -1,0 +1,75 @@
+﻿@model DDinst.Models.RegModel
+@{
+    ViewBag.Title = "Registration";
+}
+
+<h2>Регистрация</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true)
+
+    <div class="form-group row">
+        <div class="col-sm-2 col-form-label">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { @class = "form-control mb-2 mr-sm-2" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2 col-form-label">
+            @Html.LabelFor(model => model.Nickname, new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nickname, new { @class = "form-control mb-2 mr-sm-2" })
+            @Html.ValidationMessageFor(model => model.Nickname)
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2 col-form-label">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { @class = "form-control mb-2 mr-sm-2" })
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-2 col-form-label">
+            @Html.LabelFor(model => model.RetryPassword, new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RetryPassword)
+            @Html.ValidationMessageFor(model => model.RetryPassword)
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-2 col-form-label">
+            @Html.LabelFor(model => model.Birth, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Birth, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @Html.ValidationMessageFor(model => model.Birth, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Зарегистрировать" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </div>
+    }

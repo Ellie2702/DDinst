@@ -1,0 +1,41 @@
+﻿@model DDinst.Models.FeedModel
+@{
+    ViewBag.Title = "Feed";
+}
+
+<h2>Лента</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @{
+            int i = Model.Posts.Count;
+            while (i-- > 0) 
+            {
+                <div class="card m-1">
+                    
+                    <div class="card-body" style="border:initial; border-radius:10px ; border-color:darkgrey; border-collapse:collapse;">
+                        <img style="padding:10px 5px 0px 5px; max-width: 300px; max-height: 300px;" src="~/Files/@Model.images.ElementAt(i).ImageName" />
+
+                        <div class="card-text ml-2">
+                            @Model.Posts[i].Content
+                        </div>
+                        <div class="text-left text-info ml-2">
+                            Автор:
+                            @Model.Nickname.ElementAt(i)
+                        </div>
+                        <div class="text-info ml-2">
+                            Дата:
+                            @Model.Posts.ElementAt(i).DateCreated
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+
+
+
+}

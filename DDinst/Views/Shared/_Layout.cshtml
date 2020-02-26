@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <style>
+        footer {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-light bg-light sticky-top mb-2">
+        <div class="container">
+            <div class="navbar-header">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Профиль", "Profile", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Лента", "Feed", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Выход", "Logoff", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("Лента", "Feed", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Регистрация", "Registration", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Вход", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="footer fixed-bottom d-flex bg-light flex-row justify-content-center">
+            <p class="mt-2">&copy; @DateTime.Now.Year - DigDes instagram</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

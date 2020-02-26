@@ -1,0 +1,109 @@
+﻿@model DDinst.Models.ProfileModel
+@{
+    ViewBag.Title = "Профиль";
+}
+
+<h2>Профиль</h2>
+<hr />
+@using (Html.BeginForm("UploadAvatar", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <script type="text/javascript">
+
+    @*$('#submit').on('click', function (e) {
+        e.preventDefault();
+        var files = document.getElementById('uploadFile').files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("UploadAvatar", "Home")',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (xhr, status, p3) {
+                        alert(xhr.responseText);
+                    }
+                });
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+    });*@
+    </script>
+    
+
+    <div class="list-group-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="list-group-item" style="max-width: 600px; max-height: 300px;">
+            <center>
+                <img class="AvatarImage alert-info shadow Card image center-block" style="border-radius: 75px; shape-image-threshold:inherit; max-width: 150px; max-height: 200px;" title="Let's see! You so cute~" src="~/Files/@Model.Avatar_Name"
+                     onerror="this.onerror=null;this.src='https://placeimg.com/200/300/animals';" />
+            </center>
+        </div>
+        <div class="list-group-item input-group" style="max-width: 600px; max-height: 300px;">
+            <div class="input-group-prepend">
+                <input class="input-group-text" type="file" name="upload" id="uploadFile" />
+                <button class="btn btn-outline-secondary" id="submit">Загрузить</button>
+            </div>
+        </div>
+
+        <div class="list-group-item" style="max-width: 600px; max-height: 300px;">
+            @Html.DisplayNameFor(model => model.Nickname)
+            @Html.DisplayFor(model => model.Nickname, new { @class = "control-label col-md-2" })
+        </div>
+
+        <div class="list-group-item" style="max-width: 600px; max-height: 300px;">
+            @Html.DisplayNameFor(model => model.Birth)
+            @Html.DisplayFor(model => model.Birth, new { @class = "control-label col-md-2" })
+        </div>
+
+        <div class="list-group-item" style="max-width: 600px; max-height: 300px;">
+            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayFor(model => model.Email, new { @class = "control-label col-md-2" })
+        </div>
+    </div>
+
+
+    <hr />
+
+    <h4 class="center-block ml-1">Ваши посты:</h4>
+    <div class="dl-horizontal">
+
+        @Html.ActionLink("Добавить пост", "NewPost", "Home", new { area = "" }, new { @class = "btn btn-secondary m-1" })
+
+    </div>
+
+    <div>
+        @{
+            int i = Model.Posts.Count;
+            while (i-- > 0) // i dont fucking know what the fuck is it :/
+            {
+                <div class="card m-1">
+                    <div class="card-body" style="border:initial; border-radius:10px ; border-color:darkgrey; border-collapse:collapse;">
+                        <img style="padding:10px 5px 0px 5px; max-width: 300px; max-height: 300px;" src="~/Files/@Model.images.ElementAt(i).ImageName" />
+
+                        <div class="card-text ml-2">
+                            @Html.DisplayFor(model => model.Posts.ElementAt(i).Content)
+                        </div>
+
+                        <div class="text-info ml-2">
+                            @Html.DisplayFor(model => model.Posts.ElementAt(i).DateCreated)
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+}
